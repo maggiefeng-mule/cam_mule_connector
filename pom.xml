@@ -56,6 +56,31 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.outputDirectory}/test-properties.properties</outputFile>
+                            <urls>
+                                <url>https://google.com</url>
+                                <url>file:///Users/mjohnerson/temp/supersecret.txt</url>
+                                <url>file:///Users/mjohnerson/temp/test-private-key.pem</url>
+                            </urls>
+                            <files>
+                                <file>/Users/mjohnerson/temp/test-private-key.pem</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>2.5.2</version>
