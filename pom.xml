@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mule-tutorial-connector</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <name>Tutorial Connector</name>
+    <packaging>mule-extension</packaging>
+
+    <properties>
+        <skip.unit.tests>false</skip.unit.tests>
+        <skip.integration.tests>false</skip.integration.tests>
+        <tag>${project.artifactId}-${project.version}</tag>
+    </properties>
+
+    <parent>
+        <groupId>com.mulesoft.connectors</groupId>
+        <artifactId>mule-connectivity-parent</artifactId>
+        <version>1.2.3</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mule.extensions</groupId>
+            <artifactId>mule-request-builder</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.services</groupId>
+            <artifactId>mule-service-http</artifactId>
+            <version>1.1.2</version>
+            <classifier>mule-service</classifier>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.services</groupId>
+            <artifactId>mule-service-scheduler</artifactId>
+            <version>1.1.5</version>
+            <classifier>mule-service</classifier>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <scm>
+        <connection>scm:git:https://github.com/mulesoft/mule-tutorial-connector.git</connection>
+        <developerConnection>scm:git:https://github.com/mulesoft/mule-tutorial-connector.git</developerConnection>
+        <url>https://github.com/mulesoft/mule-tutorial-connector</url>
+        <tag>HEAD</tag>
+    </scm>
+    <repositories>
+        <repository>
+            <id>mule-releases</id>
+            <name>Nexus Public Releases</name>
+            <url>https://repository-master.mulesoft.org/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <enableAssertions>false</enableAssertions>
+                    <failIfNoTests>false</failIfNoTests>
+                    <skipTests>${skip.unit.tests}</skipTests>
+                    <excludes>
+                        <exclude>**/functional/**.*.java</exclude>
+                        <exclude>**/*TestCase.java</exclude>
+                        <exclude>**/*IT.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.20.1</version>
+                <configuration>
+                    <enableAssertions>false</enableAssertions>
+                    <failIfNoTests>false</failIfNoTests>
+                    <skipTests>${skip.integration.tests}</skipTests>
+                    <includes>
+                        <include>**/functional/**.*.java</include>
+                        <include>**/*TestCase.java</include>
+                        <include>**/*IT.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

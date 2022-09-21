@@ -1,0 +1,12 @@
+@Library('mule-jenkins-connector-pipelines')_
+import static pipelines.*
+
+def pipelineParams = [ gitUrl        : 'https://github.com/mulesoft/mule-tutorial-connector.git',
+                       branchName    : 'develop',
+                       connectorName : 'mule-tutorial-connector',
+                       jdkName       : 'JDK8',
+                       nodeExecutor  : 'linux',
+                       emailNotificationRecipients : 'fernando.palacios@mulesoft.com',
+                       slackNotificationChannels   : '#connector-builds-vl']
+
+develop4xPipeline(pipelineParams)

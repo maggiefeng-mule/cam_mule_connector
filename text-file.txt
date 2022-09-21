@@ -1,0 +1,5 @@
+This is a simple text file to test commits and multibranch pipelines.
+This file was created by Pablo Grasso.
+Is just a simple file.
+
+Add change 7 to text file.
